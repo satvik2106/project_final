@@ -1,0 +1,61 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('./images/main.gif') no-repeat center center/cover;
+  
+}
+
+.content {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.title {
+  /* font-size: 2.5rem; */
+  /* font-weight: bold; */
+  /* margin-bottom: 20px; */
+  color: white;
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  
+ 
+}
+
+.subtitle {
+  margin-top: -0px;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  font-family: "Tangerine", cursive;
+  font-size:50px;
+  font-weight: bold;
+}
+
+.get-started {
+  background-color: #1e90ff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.get-started:hover {
+  background-color: #0056b3;
+}

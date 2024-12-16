@@ -1,0 +1,198 @@
+/* Center the login box */
+h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 20px;
+  color: red;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.word {
+  font-family: "Goblin One", serif;
+  font-weight: 300;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+.signup-link {
+  color: #c0d9f3;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.signup-link:hover {
+  color: #21db14;
+}
+
+.login-container {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('./images/main.gif') no-repeat center center/cover;
+  border-color: whitesmoke;
+}
+
+.login-box {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 350px;
+  border-color: white;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+  color: #fff7f7;
+  font-weight: bold;
+}
+
+.signup-input {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  background: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: black;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.signup-input:focus {
+  border-color: #4caf50;
+}
+
+.robot-verification {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.verify-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  text-align: center;
+}
+
+.bubble-loader {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.bubble-loader span {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  animation: bubble 1.2s infinite ease-in-out;
+  align-items: center;
+  text-align: center;
+}
+
+.bubble-loader span:nth-child(2) {
+  align-items: center;
+  animation-delay: -0.4s;
+  text-align: center;
+}
+
+.bubble-loader span:nth-child(3) {
+  align-items: center;
+  animation-delay: -0.8s;
+  text-align: center;
+}
+
+@keyframes bubble {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.verified-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #28a745;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.login-btn.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.account-text {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #fffcfc;
+}.success-message {
+  color: rgb(41, 199, 197);
+   font-family: "Knewave", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px; /* Reduced font size */
+  margin-top: 10px; /* Optional spacing */
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  font-size: 14px; /* Consistent font size with success message */
+}
+
+.verified-text {
+  color: green;
+  font-weight: bold;
+}
+
+.bubble-loader span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background: gray;
+  border-radius: 50%;
+  animation: loading 1.2s infinite ease-in-out;
+}
+
+@keyframes loading {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

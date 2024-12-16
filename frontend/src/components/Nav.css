@@ -1,0 +1,124 @@
+/* General Navbar Styling */
+.prime-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    /* background-color: #0f171e; Prime Video's dark background */
+    color: white;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: 40px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Profile Dropdown */
+.profile-container {
+    position: relative;
+}
+
+.profile-icon {
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #1a242f;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    width: 150px;
+    z-index: 10;
+}
+
+.profile-dropdown .dropdown-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #2a3b4c;
+}
+
+.profile-dropdown .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.profile-dropdown .dropdown-item:hover {
+    background-color: #2a3b4c;
+}
+
+/* Signout Button */
+.signout-button {
+    display: block;
+    width: 100%;
+    background-color: #e50914; /* Netflix-style red */
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signout-button:hover {
+    background-color: #c40812;
+}
+
+/* Account Popup Styling */
+.account-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #1a242f;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 250px;
+    text-align: left;
+}
+
+.account-popup p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.close-popup {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.close-popup:hover {
+    background-color: #c40812;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-center {
+        display: none; /* Hide links for smaller screens */
+    }
+}
