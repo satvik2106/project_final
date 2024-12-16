@@ -1,0 +1,131 @@
+/* Container for centering the form */
+.bc {
+  font-family: "Goblin One", serif;
+  font-weight: 300;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.upload-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 80px); /* Subtract the navbar height (assuming 80px height) */
+  transition: all 0.5s ease;
+  padding-top: 80px; /* Add padding for the navbar space */
+  box-sizing: border-box; /* Ensure padding doesn't affect the layout */
+}
+
+/* Form container */
+.form-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  margin-top: -100px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.5s ease;
+  transform: translateY(30px); /* Initial position for animation */
+  opacity: 0;
+  animation: slideIn 1s forwards; /* Animation for the form appearance */
+}
+
+/* Smooth animation to make the form appear from below */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Heading */
+.form-container h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+/* Input group styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+  color: #fff7f7;
+  font-weight: bold;
+}
+
+/* Input field styling */
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  background: black; /* Default background */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: black; /* Text color remains black */
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Ensure text color stays black regardless of input status */
+.form-group input:valid,
+.form-group input:focus {
+  color: black;
+  background: white;
+}
+
+/* Focus state */
+.form-group input:focus {
+  border-color: #4caf50; /* Green border on focus */
+}
+
+/* Image Preview */
+.image-preview img {
+  height: 50px;
+  width: 50px;
+  max-height: 50px;
+  max-width: 50px;
+  margin-top: 10px;
+}
+
+/* Submit button styling */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.submit-btn:active {
+  background-color: #004085;
+  transform: scale(1);
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
