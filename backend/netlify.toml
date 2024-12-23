@@ -1,0 +1,6 @@
+[build]
+  functions = "netlify/functions"
+  publish = "build"  # Path to your React frontend build folder
+
+[build.environment]
+  NODE_VERSION = "14"  # Optional, specify Node version
