@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -8,6 +9,9 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "mongoose": "^8.8.4"
+    "react": "^18.0.0", 
+    "react-dom": "^18.0.0",  
+    "react-scripts": "^5.0.0",  
+    "mongoose": "^8.8.4"  
   }
 }
