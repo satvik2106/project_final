@@ -6,7 +6,7 @@ const addAccountRoutes = require('./scripts/addacc'); // Import add-account rout
 require('dotenv').config(); // Load environment variables
 
 const app = express();
-const allowedOrigins = ['http://localhost:3000', 'https://your-app.netlify.app'];
+const allowedOrigins = ['http://localhost:3000', 'https://signare-g182.netlify.app'];
 
 // Enable CORS for requests from the Netlify frontend
 app.use(cors({
