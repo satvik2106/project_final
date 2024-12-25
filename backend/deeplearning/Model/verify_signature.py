@@ -15,7 +15,7 @@ db = mongo_client.yourdb
 collection = db.accounts
 
 # Load the pre-trained model
-trained_model = load_model(r"C:\Users\Satvik Vattipalli\Downloads\Signature_verification(DL model).h5")
+trained_model = load_model("../Model/Signature_verification(DL model).h5")
 
 # Create Flask app
 app = Flask(__name__)
