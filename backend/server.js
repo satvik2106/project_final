@@ -12,7 +12,6 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000',              // Local development frontend
   'https://signare-g182.vercel.app', // Deployed Vercel frontend
-  'https://signare-g182.netlify.app', // Deployed Netlify frontend
 ];
 
 // Enable CORS
