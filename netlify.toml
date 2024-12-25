@@ -1,0 +1,8 @@
+[build]
+  functions = "backend/api"   # Path to your functions directory
+  publish = "build"  # Path to the frontend build directory (if applicable)
+
+[[redirects]]
+  from = "/old-url"
+  to = "/new-url"
+  status = 301

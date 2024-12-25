@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth'); // Import auth routes
 const addAccountRoutes = require('./scripts/addacc'); // Import add-account routes
+const { spawn } = require('child_process'); // Import child_process to run Python script
 require('dotenv').config(); // Load environment variables
 
 const app = express();
@@ -58,8 +59,30 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error', details: err.message });
 });
 
+// Start the Python script (verify_signature.py) when the server starts
+const startPythonScript = () => {
+  const pythonScriptPath = './deeplearning/Model/verify_signature.py';
+
+  const pythonProcess = spawn('python', [pythonScriptPath]);
+
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  pythonProcess.on('close', (code) => {
+    console.log(`Python script exited with code ${code}`);
+  });
+};
+
+// Call the function to start the Python script
+startPythonScript();
+
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 });

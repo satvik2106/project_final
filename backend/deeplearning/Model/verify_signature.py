@@ -7,16 +7,17 @@ from flask_cors import CORS
 import matplotlib.pyplot as plt
 import cv2
 import base64
+import os
 from pymongo import MongoClient
 
 # MongoDB connection
-mongo_client = MongoClient("mongodb://localhost:27017/")
-db = mongo_client.yourdb
+mongo_client = MongoClient("mongodb+srv://satvikvattipalli1311:8I4SOudfJO8n8fIp@signare.w1j4f.mongodb.net/?retryWrites=true&w=majority&appName=Signare")
+db = mongo_client.test
 collection = db.accounts
 
 # Load the pre-trained model
-trained_model = load_model("../Model/Signature_verification(DL model).h5")
-
+model_path = os.path.join(os.path.dirname(__file__), '../Signature_verification(DL model).h5')
+trained_model = load_model(model_path)
 # Create Flask app
 app = Flask(__name__)
 CORS(app)
