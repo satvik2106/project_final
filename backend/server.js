@@ -11,7 +11,7 @@ const app = express();
 // List of allowed origins
 const allowedOrigins = [
   'http://localhost:3000',              // Local development frontend
-  'https://signare-g182.vercel.app', // Deployed Vercel frontend
+  'https://signare-g182.vercel.app',    // Deployed Vercel frontend
 ];
 
 // Enable CORS
@@ -59,20 +59,24 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error', details: err.message });
 });
 
-// Start the Python script (verify_signature.py) when the server starts
+// Function to start the Python script (verify_signature.py)
 const startPythonScript = () => {
-  const pythonScriptPath = './deeplearning/Model/verify_signature.py';
+  const pythonScriptPath = './deeplearning/Model/verify_signature.py';  // Ensure this path is correct
 
+  // Spawn the Python process
   const pythonProcess = spawn('python', [pythonScriptPath]);
 
+  // Log the output from Python script
   pythonProcess.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
   });
 
+  // Log any errors from the Python script
   pythonProcess.stderr.on('data', (data) => {
     console.error(`stderr: ${data}`);
   });
 
+  // Log when the Python script exits
   pythonProcess.on('close', (code) => {
     console.log(`Python script exited with code ${code}`);
   });
@@ -82,7 +86,7 @@ const startPythonScript = () => {
 startPythonScript();
 
 // Start the server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 });
