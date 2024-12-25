@@ -16,8 +16,13 @@ db = mongo_client.test
 collection = db.accounts
 
 # Load the pre-trained model
+<<<<<<< HEAD
 model_path = os.path.join(os.path.dirname(__file__), '../Signature_verification(DL model).h5')
 trained_model = load_model(model_path)
+=======
+trained_model = load_model("../Signature_verification(DL model).h5")
+
+>>>>>>> e1bfd445ff420f14508e4882b9e97fd2af8ff77a
 # Create Flask app
 app = Flask(__name__)
 CORS(app)
