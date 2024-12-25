@@ -10,8 +10,8 @@ import base64
 from pymongo import MongoClient
 
 # MongoDB connection
-mongo_client = MongoClient("mongodb://localhost:27017/")
-db = mongo_client.yourdb
+mongo_client = MongoClient("mongodb+srv://satvikvattipalli1311:8I4SOudfJO8n8fIp@signare.w1j4f.mongodb.net/?retryWrites=true&w=majority&appName=Signare")
+db = mongo_client.test
 collection = db.accounts
 
 # Load the pre-trained model
