@@ -28,7 +28,7 @@ const VerificationPage = () => {
       const response = await fetch('https://backend-new-misy.onrender.com/api/auth/check-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountNumber }),
+        body: JSON.stringify({ account_number:accountNumber }),
       });
 
       const result = await response.json();
