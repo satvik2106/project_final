@@ -25,7 +25,7 @@ const VerificationPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/check-account', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/auth/check-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accountNumber }),
@@ -61,7 +61,7 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/signature/verify', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/signature/verify', {
         method: 'POST',
         body: formData,
       });
