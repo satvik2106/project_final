@@ -9,16 +9,15 @@ const VerificationPage = () => {
   const [verificationStatus, setVerificationStatus] = useState('');
   const [similarity, setSimilarity] = useState(null);
   const [uploadedSignature, setUploadedSignature] = useState(null);
-  const [referenceSignature, setReferenceSignature] = useState(null);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  // Function to verify account number with backend
+  // Function to verify account number
   const handleAccountVerification = async () => {
-    setError(''); // Clear previous error messages
+    setError(''); // Clear any previous errors
 
-    // Input validation: Check account number format
-    const accountNumberRegex = /^[0-9]{10}$/; // Example: Account number must be 10 digits
+    // Validate account number format (e.g., 10-digit number)
+    const accountNumberRegex = /^[0-9]{10}$/;
     if (!accountNumberRegex.test(accountNumber.trim())) {
       setError('Invalid account number. It must be a 10-digit number.');
       return;
@@ -28,18 +27,18 @@ const VerificationPage = () => {
       const response = await fetch('https://backend-new-misy.onrender.com/api/auth/check-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account_number:accountNumber }),
+        body: JSON.stringify({ account_number: accountNumber }),
       });
 
       const result = await response.json();
 
       if (response.status === 200) {
         setIsAccountValid(true);
-        setError(''); // Clear error messages on success
+        setError(''); // Clear error on success
         alert(result.message); // Show success message
       } else {
         setIsAccountValid(false);
-        setError(result.message || 'Invalid account number.');
+        setError(result.message || 'Account verification failed.');
       }
     } catch (err) {
       console.error('Error verifying account:', err);
@@ -47,14 +46,14 @@ const VerificationPage = () => {
     }
   };
 
-  // Handle signature image upload
+  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setImage(file);
     setUploadedSignature(file); // Save uploaded signature for display
   };
 
-  // Handle verification
+  // Handle signature verification
   const handleVerify = async () => {
     const formData = new FormData();
     formData.append('account_number', accountNumber);
@@ -65,18 +64,20 @@ const VerificationPage = () => {
         method: 'POST',
         body: formData,
       });
+
       const data = await response.json();
 
-      // Log the data received from the backend
-      console.log(data);
-
-      // Update verification status, similarity, and reference signature
-      setVerificationStatus(data.result === 'Verified' ? 'Verified' : 'Forged');
-      setSimilarity(data.similarity || null);
-      setReferenceSignature(data.referenceSignature || null); // Assuming the backend provides this
-      setShowModal(true);
-    } catch (error) {
-      console.log('Error verifying signature:', error);
+      if (response.ok) {
+        // Update verification results
+        setVerificationStatus(data.result === 'Verified' ? 'Verified' : 'Forged');
+        setSimilarity(data.similarity || null);
+        setShowModal(true); // Open modal to display results
+      } else {
+        setError(data.message || 'Signature verification failed.');
+      }
+    } catch (err) {
+      console.error('Error verifying signature:', err);
+      setError('An error occurred during signature verification. Please try again.');
     }
   };
 
@@ -85,14 +86,14 @@ const VerificationPage = () => {
       <Nav />
       <div className="verification-container">
         <div className="verification-box">
-          <h1 className="verification-title">VERIFICATION</h1>
+          <h1 className="verification-title">Signature Verification</h1>
           <p className="verification-message">
-            Please provide your account details and signature image for verification.
+            Please enter your account details and upload your signature for verification.
           </p>
 
           {/* Account Number Input */}
           <label className="input-label" htmlFor="account-number">
-            Enter your account number:
+            Account Number:
           </label>
           <input
             type="text"
@@ -102,7 +103,7 @@ const VerificationPage = () => {
             onChange={(e) => setAccountNumber(e.target.value)}
           />
           <button
-            className="go-home-btn"
+            className="verify-account-btn"
             onClick={handleAccountVerification}
             disabled={!accountNumber.trim()}
           >
@@ -110,9 +111,9 @@ const VerificationPage = () => {
           </button>
           {error && <p className="error-message">{error}</p>}
 
-          {/* Image Upload Field */}
+          {/* Signature Upload */}
           <label className="input-label" htmlFor="signature-image">
-            Upload your signature:
+            Upload Signature:
           </label>
           <input
             type="file"
@@ -122,14 +123,12 @@ const VerificationPage = () => {
             onChange={handleImageUpload}
             disabled={!isAccountValid}
           />
-
-          {/* Verify Button */}
           <button
-            className="go-home-btn"
+            className="verify-signature-btn"
             onClick={handleVerify}
             disabled={!isAccountValid || !image}
           >
-            Verify
+            Verify Signature
           </button>
         </div>
       </div>
@@ -138,22 +137,20 @@ const VerificationPage = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            {/* Display fake or genuine symbol */}
+            {/* Display Verification Symbol */}
             <img
               src={
                 similarity > 0.9
-                  ? 'https://png.pngtree.com/png-clipart/20230524/original/pngtree-verified-stamp-png-image_9168723.png' // Genuine symbol URL
-                  : 'https://pnghq.com/wp-content/uploads/fake-stamp-png-picture-350x269.png' // Forged symbol URL
+                  ? 'https://png.pngtree.com/png-clipart/20230524/original/pngtree-verified-stamp-png-image_9168723.png' // Verified symbol
+                  : 'https://pnghq.com/wp-content/uploads/fake-stamp-png-picture-350x269.png' // Forged symbol
               }
               alt={verificationStatus}
               className="modal-image"
             />
-            {/* Display verification result details */}
             <div className="verification-result">
               <h3>Verification Result:</h3>
-              <p>{similarity > 0.8 ? 'Signature is Genuine.' : 'Signature is Forged.'}</p>
+              <p>{verificationStatus}</p>
               {similarity !== null && <p>Similarity: {Math.round(similarity * 100)}%</p>}
-
               <div className="images-container">
                 <div className="image-box">
                   <h4>Uploaded Signature</h4>
@@ -169,7 +166,6 @@ const VerificationPage = () => {
                 </div>
               </div>
             </div>
-
             <button className="close-btn" onClick={() => setShowModal(false)}>
               Close
             </button>
