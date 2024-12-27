@@ -61,7 +61,7 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/signature/verify', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/signature/verify', {
         method: 'POST',
         body: formData,
       });
