@@ -33,7 +33,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await fetch('https://backend-new-misy.onrender.com/api/auth/signup', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
