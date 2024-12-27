@@ -67,20 +67,17 @@ const VerificationPage = () => {
 
       const data = await response.json();
 
-      if (response.ok) {
-        // Update verification results
-        setVerificationStatus(data.result === 'Verified' ? 'Verified' : 'Forged');
-        setSimilarity(data.similarity || null);
-        setShowModal(true); // Open modal to display results
-      } else {
-        setError(data.message || 'Signature verification failed.');
-      }
-    } catch (err) {
-      console.error('Error verifying signature:', err);
-      setError('An error occurred during signature verification. Please try again.');
+      // Log the data received from the backend
+      console.log(data);
+
+      // Update verification status, similarity, and reference signature
+      setVerificationStatus(data.result === 'Verified' ? 'Verified' : 'Forged');
+      setSimilarity(data.similarity || null);
+      setShowModal(true); // Open modal to display results
+     } catch (error) {
+      console.log('Error verifying signature:', error);
     }
   };
-
   return (
     <div>
       <Nav />
@@ -149,7 +146,7 @@ const VerificationPage = () => {
             />
             <div className="verification-result">
               <h3>Verification Result:</h3>
-              <p>{verificationStatus}</p>
+              <p>{similarity > 0.8 ? 'Signature is Genuine.' : 'Signature is Forged.'}</p>
               {similarity !== null && <p>Similarity: {Math.round(similarity * 100)}%</p>}
               <div className="images-container">
                 <div className="image-box">
