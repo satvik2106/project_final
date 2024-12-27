@@ -59,31 +59,31 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error', details: err.message });
 });
 
-// Function to start the Python script (verify_signature.py)
-const startPythonScript = () => {
-  const pythonScriptPath = './deeplearning/Model/verify_signature.py';  // Ensure this path is correct
+// // Function to start the Python script (verify_signature.py)
+// const startPythonScript = () => {
+//   const pythonScriptPath = './deeplearning/Model/verify_signature.py';  // Ensure this path is correct
 
-  // Spawn the Python process
-  const pythonProcess = spawn('python', [pythonScriptPath]);
+//   // Spawn the Python process
+//   const pythonProcess = spawn('python', [pythonScriptPath]);
 
-  // Log the output from Python script
-  pythonProcess.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`);
-  });
+//   // Log the output from Python script
+//   pythonProcess.stdout.on('data', (data) => {
+//     console.log(`stdout: ${data}`);
+//   });
 
-  // Log any errors from the Python script
-  pythonProcess.stderr.on('data', (data) => {
-    console.error(`stderr: ${data}`);
-  });
+//   // Log any errors from the Python script
+//   pythonProcess.stderr.on('data', (data) => {
+//     console.error(`stderr: ${data}`);
+//   });
 
-  // Log when the Python script exits
-  pythonProcess.on('close', (code) => {
-    console.log(`Python script exited with code ${code}`);
-  });
-};
+//   // Log when the Python script exits
+//   pythonProcess.on('close', (code) => {
+//     console.log(`Python script exited with code ${code}`);
+//   });
+// };
 
-// Call the function to start the Python script
-startPythonScript();
+// // Call the function to start the Python script
+// startPythonScript();
 
 // Start the server
 const PORT = process.env.PORT || 5000;
