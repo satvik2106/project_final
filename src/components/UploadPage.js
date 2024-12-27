@@ -46,7 +46,7 @@ const UploadPage = () => {
     try {
       const base64Image = await convertToBase64(image); // Convert image to Base64 string
 
-      const response = await fetch('http://localhost:5000/api/account/add-account', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/account/add-account', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
