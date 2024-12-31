@@ -24,11 +24,10 @@ const VerificationPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/check-account', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/auth/check-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accountNumber }),
-        body: JSON.stringify({ account_number: accountNumber }),
       });
 
       const result = await response.json();
@@ -61,7 +60,7 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/signature/verify', {
+      const response = await fetch('https://backend-new-misy.onrender.com/api/signature/verify', {
         method: 'POST',
         body: formData,
       });
@@ -75,10 +74,11 @@ const VerificationPage = () => {
       setVerificationStatus(data.result === 'Verified' ? 'Verified' : 'Forged');
       setSimilarity(data.similarity || null);
       setShowModal(true); // Open modal to display results
-     } catch (error) {
+    } catch (error) {
       console.log('Error verifying signature:', error);
     }
   };
+
   return (
     <div>
       <Nav />
@@ -138,15 +138,9 @@ const VerificationPage = () => {
             {/* Display Verification Symbol */}
             <img
               src={
-<<<<<<< HEAD
                 similarity > 0.8
                   ? 'https://png.pngtree.com/png-clipart/20230524/original/pngtree-verified-stamp-png-image_9168723.png' // Genuine symbol URL
                   : 'https://pnghq.com/wp-content/uploads/fake-stamp-png-picture-350x269.png' // Forged symbol URL
-=======
-                similarity > 0.9
-                  ? 'https://png.pngtree.com/png-clipart/20230524/original/pngtree-verified-stamp-png-image_9168723.png' // Verified symbol
-                  : 'https://pnghq.com/wp-content/uploads/fake-stamp-png-picture-350x269.png' // Forged symbol
->>>>>>> 020aba70cd30a747a49f10d8dbfc94cf2ba00925
               }
               alt={verificationStatus}
               className="modal-image"
