@@ -9,6 +9,7 @@ const VerificationPage = () => {
   const [verificationStatus, setVerificationStatus] = useState('');
   const [similarity, setSimilarity] = useState(null);
   const [uploadedSignature, setUploadedSignature] = useState(null);
+  const [referenceSignature, setReferenceSignature] = useState(null);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -73,6 +74,7 @@ const VerificationPage = () => {
       // Update verification status, similarity, and reference signature
       setVerificationStatus(data.result === 'Verified' ? 'Verified' : 'Forged');
       setSimilarity(data.similarity || null);
+      setReferenceSignature(data.referenceSignature || null);
       setShowModal(true); // Open modal to display results
     } catch (error) {
       console.log('Error verifying signature:', error);
@@ -101,7 +103,7 @@ const VerificationPage = () => {
             onChange={(e) => setAccountNumber(e.target.value)}
           />
           <button
-            className="verify-account-btn"
+            className="go-home-btn"
             onClick={handleAccountVerification}
             disabled={!accountNumber.trim()}
           >
@@ -122,7 +124,7 @@ const VerificationPage = () => {
             disabled={!isAccountValid}
           />
           <button
-            className="verify-signature-btn"
+            className="go-home-btn"
             onClick={handleVerify}
             disabled={!isAccountValid || !image}
           >
