@@ -25,7 +25,8 @@ const VerificationPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/check-account', {
+      const API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
+      const response = await fetch(`${API_URL}/api/auth/check-account`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accountNumber }),
@@ -61,7 +62,8 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      const response = await fetch('http://localhost:5000/api/signature/verify', {
+      const API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
+      const response = await fetch(`${API_URL}/api/signature/verify`, {
         method: 'POST',
         body: formData,
       });

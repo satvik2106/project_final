@@ -1,9 +1,37 @@
-node_modules
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Environment
 .env
+backend/.env
+
+# Build output (Render builds fresh each deploy)
+build/
+
+# Debug logs
+firebase-debug.log
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Local test files
+test_db.js
+backend_copied/
+
+# Python files (not needed for deployment)
+app.py
+model.py
+__pycache__/
+*.pyc
+
+# Images (uploaded content)
 *.jpg
 *.jpeg
 *.png
-backend_copied
-test_db.js
-app.py
-model.py
