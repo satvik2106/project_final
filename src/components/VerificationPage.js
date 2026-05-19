@@ -25,7 +25,7 @@ const VerificationPage = () => {
     }
 
     try {
-      const response = await fetch('https://backend-new-misy.onrender.com/api/auth/check-account', {
+      const response = await fetch('http://localhost:5000/api/auth/check-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accountNumber }),
@@ -61,7 +61,7 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      const response = await fetch('https://backend-new-misy.onrender.com/api/signature/verify', {
+      const response = await fetch('http://localhost:5000/api/signature/verify', {
         method: 'POST',
         body: formData,
       });
@@ -142,7 +142,7 @@ const VerificationPage = () => {
               src={
                 similarity > 0.8
                   ? 'https://png.pngtree.com/png-clipart/20230524/original/pngtree-verified-stamp-png-image_9168723.png' // Genuine symbol URL
-                  : 'https://pnghq.com/wp-content/uploads/fake-stamp-png-picture-350x269.png' // Forged symbol URL
+                  : 'https://png.pngtree.com/png-clipart/20250418/original/pngtree-red-fake-stamp-graphic-for-forged-documents-counterfeit-approvals-and-deceptive-png-image_20843356.png' // Forged symbol URL
               }
               alt={verificationStatus}
               className="modal-image"
