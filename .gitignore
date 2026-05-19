@@ -26,8 +26,6 @@ test_db.js
 backend_copied/
 
 # Python files (not needed for deployment)
-app.py
-model.py
 __pycache__/
 *.pyc
 
