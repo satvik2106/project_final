@@ -50,14 +50,29 @@ app.use('/api/account', addAccountRoutes); // Account routes
 
 // Proxy route for signature verification using transparent stream pipe
 const http = require('http');
+const https = require('https');
 app.post('/api/signature/verify', (req, res) => {
-  const proxyReq = http.request({
-    host: '127.0.0.1',
-    port: 5001,
-    path: '/api/signature/verify',
+  const pythonUrl = process.env.PYTHON_ML_URL || 'http://127.0.0.1:5001';
+  
+  let targetUrl;
+  try {
+    targetUrl = new URL('/predict', pythonUrl);
+  } catch (err) {
+    console.error('Invalid PYTHON_ML_URL:', err);
+    return res.status(500).json({ error: 'Configuration Error', details: 'Invalid ML service URL' });
+  }
+
+  const requestModule = targetUrl.protocol === 'https:' ? https : http;
+
+  const options = {
+    hostname: targetUrl.hostname,
+    port: targetUrl.port || (targetUrl.protocol === 'https:' ? 443 : 80),
+    path: targetUrl.pathname + targetUrl.search,
     method: 'POST',
-    headers: req.headers
-  }, (proxyRes) => {
+    headers: { ...req.headers, host: targetUrl.host } // Pass headers but override host
+  };
+
+  const proxyReq = requestModule.request(options, (proxyRes) => {
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res);
   });
