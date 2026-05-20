@@ -1,0 +1,29 @@
+services:
+  # Node.js Express Backend
+  - type: web
+    name: signare-node-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PYTHON_ML_URL
+        fromService:
+          type: web
+          name: signare-python-ml
+          envVarKey: RENDER_EXTERNAL_URL
+
+  # Python Flask ML Service
+  - type: web
+    name: signare-python-ml
+    env: python
+    rootDir: backend/deeplearning
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn Model.verify_signature:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13

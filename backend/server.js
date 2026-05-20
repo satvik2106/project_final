@@ -10,7 +10,8 @@ const app = express();
 
 // List of allowed origins
 const allowedOrigins = [
-  'http://localhost:3000',              // Local development frontend
+  'http://localhost:3000',              // Local development frontend (default)
+  'http://localhost:3001',              // Local development frontend (custom)
   'https://signare-g182.vercel.app',    // Deployed Vercel frontend
 ];
 
@@ -52,7 +53,7 @@ app.get('/api/health', (req, res) => {
 // Mount API routes
 app.use('/api/auth', authRoutes); // Auth routes
 app.use('/api/account', addAccountRoutes); // Account routes
-
+console.log("Connecting to ML:", process.env.PYTHON_ML_URL);
 // Proxy route for signature verification using transparent stream pipe
 const http = require('http');
 const https = require('https');
@@ -61,7 +62,7 @@ app.post('/api/signature/verify', (req, res) => {
   
   let targetUrl;
   try {
-    targetUrl = new URL('/predict', pythonUrl);
+    targetUrl = new URL('/api/signature/verify', pythonUrl);
   } catch (err) {
     console.error('Invalid PYTHON_ML_URL:', err);
     return res.status(500).json({ error: 'Configuration Error', details: 'Invalid ML service URL' });

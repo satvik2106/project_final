@@ -55,6 +55,11 @@ def preprocess_image(image_path):
     img_array = np.expand_dims(img_array, axis=0) / 255.0
     return img_array
 
+# Health check endpoint
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok", "service": "Python ML Service"})
+
 # Signature verification endpoint
 @app.route('/api/signature/verify', methods=['POST'])
 def verify_signature():
@@ -93,5 +98,5 @@ def verify_signature():
 
 if __name__ == "__main__":
     # Get the port from the environment variable or default to 5000
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port, debug=True)  # Set debug=True only for development
