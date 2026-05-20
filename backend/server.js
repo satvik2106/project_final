@@ -39,9 +39,14 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
 
-// Define the root route
+// Define the root route to return JSON
 app.get('/', (req, res) => {
-  res.send('Welcome to the backend server!');
+  res.json({ message: 'Welcome to the backend server!' });
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'Node.js Backend' });
 });
 
 // Mount API routes
@@ -73,6 +78,18 @@ app.post('/api/signature/verify', (req, res) => {
   };
 
   const proxyReq = requestModule.request(options, (proxyRes) => {
+    const contentType = proxyRes.headers['content-type'] || '';
+    
+    // DEFENSIVE PROXY: Never pipe HTML to the frontend!
+    if (contentType.includes('text/html')) {
+      proxyRes.resume(); // Consume stream
+      console.error('Proxy Error: ML Service returned HTML instead of JSON');
+      return res.status(502).json({ 
+        error: 'ML Service Error', 
+        details: 'The Python ML service returned an HTML error page. Please check ML service logs or ensure the ML URL is correct.'
+      });
+    }
+
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res);
   });
@@ -80,8 +97,8 @@ app.post('/api/signature/verify', (req, res) => {
   req.pipe(proxyReq);
 
   proxyReq.on('error', (err) => {
-    console.error('Proxy error:', err);
-    res.status(500).json({ error: 'Proxy error', details: err.message });
+    console.error('Proxy network error:', err);
+    res.status(500).json({ error: 'Proxy network error', details: err.message });
   });
 });
 
