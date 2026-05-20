@@ -4,7 +4,6 @@ from tensorflow.keras.models import Model, load_model
 from tensorflow.keras.preprocessing import image
 from sklearn.metrics.pairwise import cosine_similarity
 from flask_cors import CORS
-import matplotlib.pyplot as plt
 import cv2
 import base64
 import os
