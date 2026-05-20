@@ -25,7 +25,7 @@ const VerificationPage = () => {
     }
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
+      const API_URL = process.env.REACT_APP_API_URL || 'https://project-final-7sjb.onrender.com';
       const response = await fetch(`${API_URL}/api/auth/check-account`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -67,8 +67,8 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      let API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
-      if (API_URL.trim() === '') API_URL = 'https://signare-backend.onrender.com';
+      let API_URL = process.env.REACT_APP_API_URL || 'https://project-final-7sjb.onrender.com';
+      if (API_URL.trim() === '') API_URL = 'https://project-final-7sjb.onrender.com';
       const targetUrl = `${API_URL}/api/signature/verify`;
 
       const response = await fetch(targetUrl, {

@@ -33,7 +33,7 @@ const LoginPage = () => {
     }
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
+      const API_URL = process.env.REACT_APP_API_URL || 'https://project-final-7sjb.onrender.com';
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

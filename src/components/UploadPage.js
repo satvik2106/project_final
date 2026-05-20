@@ -46,7 +46,7 @@ const UploadPage = () => {
     try {
       const base64Image = await convertToBase64(image); // Convert image to Base64 string
 
-      const API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
+      const API_URL = process.env.REACT_APP_API_URL || 'https://project-final-7sjb.onrender.com';
       const response = await fetch(`${API_URL}/api/account/add-account`, {
         method: 'POST',
         headers: {
