@@ -47,6 +47,11 @@ const SignupPage = () => {
         body: JSON.stringify(form), // Send form data as JSON
       });
 
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error(`API returned an invalid response format (Expected JSON, got ${contentType || 'unknown'}). Please verify the backend URL is correct.`);
+      }
+
       const result = await response.json();
 
       if (response.ok) {

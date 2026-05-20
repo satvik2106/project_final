@@ -45,15 +45,20 @@ def predict():
     uploaded_file.save(uploaded_path)
 
     # Process image
-    img = preprocess_image(uploaded_path)
-    prediction = model.predict(img)
-    predicted_class = np.argmax(prediction)  # 0 = Forged, 1 = Genuine
+    try:
+        img = preprocess_image(uploaded_path)
+        prediction = model.predict(img)
+        predicted_class = np.argmax(prediction)  # 0 = Forged, 1 = Genuine
 
-    os.remove(uploaded_path)  # Cleanup
-    result = "Genuine" if predicted_class == 1 else "Forged"
-    # Note: Returning dict with 'result' and 'similarity' to match VerificationPage.js expectations
-    similarity = float(np.max(prediction)) # Get confidence/similarity
-    return jsonify({'result': result, 'similarity': similarity})
+        os.remove(uploaded_path)  # Cleanup
+        result = "Genuine" if predicted_class == 1 else "Forged"
+        # Note: Returning dict with 'result' and 'similarity' to match VerificationPage.js expectations
+        similarity = float(np.max(prediction)) # Get confidence/similarity
+        return jsonify({'result': result, 'similarity': similarity})
+    except Exception as e:
+        if os.path.exists(uploaded_path):
+            os.remove(uploaded_path)
+        return jsonify({'error': f'Image processing failed: {str(e)}'}), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5001))
