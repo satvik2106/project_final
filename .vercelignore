@@ -1,0 +1,7 @@
+app.py
+model.py
+requirements.txt
+Procfile
+model/
+python-ml/
+backend/
