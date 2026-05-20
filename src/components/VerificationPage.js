@@ -67,15 +67,18 @@ const VerificationPage = () => {
     formData.append('verifying_signature', image);
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
-      const response = await fetch(`${API_URL}/api/signature/verify`, {
+      let API_URL = process.env.REACT_APP_API_URL || 'https://signare-backend.onrender.com';
+      if (API_URL.trim() === '') API_URL = 'https://signare-backend.onrender.com';
+      const targetUrl = `${API_URL}/api/signature/verify`;
+
+      const response = await fetch(targetUrl, {
         method: 'POST',
         body: formData,
       });
 
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
-        throw new Error(`API returned an invalid response format (Expected JSON, got ${contentType || 'unknown'}). Please verify the backend URL is correct.`);
+        throw new Error(`API returned an invalid response (Expected JSON, got ${contentType || 'unknown'}) from URL: ${targetUrl}. Please verify this backend URL is correct and online.`);
       }
 
       const data = await response.json();
