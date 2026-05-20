@@ -3,6 +3,7 @@ services:
   - type: web
     name: signare-node-backend
     env: node
+    plan: free
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
@@ -21,6 +22,7 @@ services:
   - type: web
     name: signare-python-ml
     env: python
+    plan: free
     rootDir: backend/deeplearning
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn Model.verify_signature:app
