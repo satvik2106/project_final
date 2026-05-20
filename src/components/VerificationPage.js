@@ -70,6 +70,11 @@ const VerificationPage = () => {
 
       const data = await response.json();
 
+      if (!response.ok) {
+        alert(data.error || 'Server error occurred during verification.');
+        return;
+      }
+
       // Log the data received from the backend
       console.log(data);
 
@@ -80,6 +85,7 @@ const VerificationPage = () => {
       setShowModal(true); // Open modal to display results
     } catch (error) {
       console.log('Error verifying signature:', error);
+      alert('Network error verifying signature: ' + error.message);
     }
   };
 

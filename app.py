@@ -35,9 +35,9 @@ def predict():
     if model is None:
         return jsonify({'error': 'ML Model not loaded on server. Please upload model to ' + MODEL_PATH}), 503
         
-    uploaded_file = request.files.get('file')
+    uploaded_file = request.files.get('file') or request.files.get('verifying_signature')
     if not uploaded_file:
-        return jsonify({'error': 'No file uploaded'}), 400
+        return jsonify({'error': 'No file uploaded. Make sure to send file or verifying_signature.'}), 400
         
     temp_dir = 'temp'
     os.makedirs(temp_dir, exist_ok=True)
